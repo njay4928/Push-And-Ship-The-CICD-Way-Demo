@@ -1,0 +1,36 @@
+name: PR Review Workflow
+
+# This workflow is triggered on pull request events and runs a series of steps to review the code.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Docker build
+        run: docker build -t push-and-ship-the-cicd-way-demo .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: "push-and-ship-the-cicd-way-demo"
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: "os,library"
+          severity: "CRITICAL,HIGH"
