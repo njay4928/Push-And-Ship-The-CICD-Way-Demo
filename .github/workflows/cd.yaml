@@ -1,5 +1,5 @@
 # Job 01: ci – Build and Scan
-# This job will run on every push or pull request to the main branch.
+# This job will run on every push to the main branch.
 
 # Set up the job to run on Ubuntu
 
@@ -17,22 +17,12 @@
 # Use a marketplace plugin to build a Docker image
 # Hint: Try searching for "docker build-push-action"
 
-# Set:
-
-# context to .
-
-# push to false
-
-# tags to something like myapp:latest
-
 # Run a Trivy vulnerability scan
 
 # Use the Trivy GitHub Action to scan the image you just built
 # Hint: Look for aquasecurity/trivy-action
 
 # Scan for HIGH and CRITICAL vulnerabilities only
-
-# Don't fail the build for now — just output the report
 
 # Job 02: cd – Simulated Deploy
 # This job should only run if Job 01 succeeds.
