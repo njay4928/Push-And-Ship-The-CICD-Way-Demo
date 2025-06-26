@@ -1,5 +1,4 @@
-name: PR Review Workflow
-
+name: Test and build workflow
 # This workflow is triggered on pull request events and runs a series of steps to review the code.
 
 on:
