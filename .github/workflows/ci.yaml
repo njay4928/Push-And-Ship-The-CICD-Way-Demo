@@ -32,12 +32,12 @@ jobs:
         with:
           context: .
           push: false
-          tags: user/app:latest
+          tags: test-img
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: "user/app:latest"
+          image-ref: "test-img"
           format: "table"
           exit-code: "1"
           ignore-unfixed: true
