@@ -21,8 +21,18 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Docker build
-        run: docker build -t push-and-ship-the-cicd-way-demo .
+      # - name: Docker build
+      #   run: docker build -t push-and-ship-the-cicd-way-demo .
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: user/app:latest
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
